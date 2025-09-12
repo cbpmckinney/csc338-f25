@@ -43,16 +43,18 @@ class GameBoard:
 
 
 
-    def checkwin(self) -> int:
-        
+    def checkwin(self,bd = None) -> int:
+        if bd is None:
+            bd = self.entries
         for line in WIN_LINES:
-            vals = [self.entries[r][c] for r,c in line]
+            vals = [bd[r][c] for r,c in line]
             if vals == [1, 1, 1]:   
                 return 1
             if vals == [2, 2, 2]:
                 return 2
             
-        if any(0 in row for row in self.entries):
+        if any(0 in row for row in bd):
+    
             return 0
 
         return 3
@@ -74,7 +76,7 @@ class GameBoard:
         # return (move, score)
         self.minmax_nodes += 1 
         
-        result = self.checkwin()
+        result = self.checkwin(bd)
         if result == 1: 
             return None, 10-depth # x win, prefer faster wins 
         if result == 2: 
@@ -117,7 +119,7 @@ class GameBoard:
     def alphabeta(self, bd=None, depth=0,alpha = -math.inf, beta = math.inf):
       
         self.ab_nodes += 1
-        result = self.checkwin()
+        result = self.checkwin(bd)
         if result == 1: 
             return None, 10-depth # x win, prefer faster wins 
         if result == 2: 
