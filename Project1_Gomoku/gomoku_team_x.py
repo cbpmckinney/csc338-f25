@@ -43,3 +43,9 @@ class GomokuGame:
 def select_move(bd, time_limit = None):
     # compute (r,c) within time limit
     return (r,c) 
+
+start = time.time()
+while (time.time()-start) <= 2 :
+    print('hi')
+
+
