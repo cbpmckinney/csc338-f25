@@ -19,15 +19,12 @@ class GameBoard:
 
         self.entries = [[0, 0, 0], [0, 0, 0], [0, 0 ,0]]
         
-
     def print_bd(self):
 
         for i in range(3):
             for j in range(3):
                 print(self.entries[i][j],end='')
             print('')
-
-
 
     def checkwin(self) -> int:
         
@@ -47,8 +44,6 @@ class GameBoard:
         count_1 = sum(cc == 1 for row in bd for cc in row)
         count_2 = sum(cc == 2 for row in bd for cc in row)
         return 1 if count_1 == count_2 else 2
-    
-
     
     def getmoves(self):
         return [(r,c) for r in range(3) for c in range(3) if self.entries[r][c]==0] # all possible position where the board is empty
@@ -84,8 +79,6 @@ class MCTS:
     def __init__(self, c = math.sqrt(2)):
         self.c = c
 
-    
-    
     
     def uct_select(self, node:MCTSNode, c = None) -> MCTSNode:
         # node: current node
@@ -184,7 +177,7 @@ print('-------- before move ----------')
 bd.entries = [[1,0,0],[0,2,0],[0,0,0]]
 bd.print_bd()
 print('-------- after MCTS move ----------')
-best_action, next_player, next_bd = MCTS_move(bd, iterations=2000)
+best_action, next_player, next_bd = MCTS_move(bd, iterations=1000)
 print("Best action:", best_action, "for player", next_player)
 next_bd.print_bd()
 print('----------------------------------')
